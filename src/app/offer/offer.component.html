@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="oferta" *ngIf="offer!==undefined">
+
+    <div class="row">
+      <div class="col">
+        <h4>{{offer.description}}</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="img_capa">
+          <img [src]="offer.images[0].url" />
+        </div>
+
+        <div class="thumbnails">
+          <img *ngFor="let image of offer.images" [src]="image.url" />
+
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col text-center">
+            <p>Por apenas</p>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col text-center">
+            <h1>{{offer.price | currency:'USD'}}</h1>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col text-center">
+            <button
+             type="button" 
+             class="btn btn-warning btn-lg"
+             (click)="addToCart()">Adicionar ao carrinho</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 50px; margin-bottom: 150px;">
+    <div class="col">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="rules" data-toggle="tab" role="tab" aria-controls="roles">Rules</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="adress" data-toggle="tab" href="#adress" role="tab" aria-controls="adress">Adress</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>

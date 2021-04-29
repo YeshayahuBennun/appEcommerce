@@ -1,0 +1,21 @@
+.purchase-order{
+    margin-top: 50px;
+    margin-bottom: 150px;
+}
+
+input.ng-invalid.ng-touched{
+    border: 2px solid red;
+}
+
+select.ng-invalid.ng-touched{
+    border: 2px solid red;
+}
+
+input.ng-valid.ng-touched{
+    border: 2px solid #5cb85c;
+}
+
+select.ng-valid.ng-touched{
+    border: 2px solid #5cb85c;
+    
+}

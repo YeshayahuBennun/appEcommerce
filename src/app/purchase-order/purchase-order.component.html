@@ -1,0 +1,138 @@
+<div class="container">
+  <div class="purchase-order" *ngIf="purchasedSuccessId === undefined">
+    <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+    
+      <h5>Sua Compra</h5>
+      <hr />
+
+      <div *ngIf="shopCartItens.length !== 0; else emptyCart">
+      <div *ngFor="let item of shopCartItens" class="form-row" style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
+        <div class="form-group col-sm-1">
+          <img [src]="item.img.url" class="img-fluid">
+        </div>
+        <div class="form-group col-sm-6">
+          {{item.title}}
+          <br />
+          {{item.description}}
+        </div>
+
+        <div>
+          <div class="row">
+            <div class="col">
+              <button 
+              type="button" 
+              class="btn btn-link"
+              (click)="decrement(item)">-</button>
+              {{item.amount}}
+              <button
+               type="button" 
+               class="btn btn-link"
+               (click)="add(item)">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-sm-3 d-flex justify-content-end">
+         {{item.price * item.amount | currency}}
+        </div>
+      </div>
+         
+      <div class="form-row">
+        <div class="form-group col d-flex justify-content-end">
+          <h4>Total do pedido: {{shopCartService.totalCartShop() | currency}}</h4>
+        </div>
+      </div>
+    </div>
+    <div class="div">
+      <ng-template #emptyCart>
+        <div class="form-row d-flex justify-content-center"
+             style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
+          Seu carrinho está vazio! Não perca tempo, aproveite as ofertas.  
+        </div>
+      </ng-template>
+    </div>
+      <br />
+
+      <h5>Dados de entrega</h5>
+      <hr />
+
+      <div class="form-row">
+
+        <div class="form-group col-md-6">
+          <input 
+          type="text" 
+          class="form-control" 
+          placeholder="Endereço" 
+          autocomplete="off"
+          formControlName="adress" 
+          
+          >
+          <small *ngIf="form.get('adress').valid && form.get('adress').touched" class="form-text text-success">OK</small>
+          <small *ngIf="!form.get('adress').valid && form.get('adress').touched" class="form-text text-danger">Enderecco inválido</small>
+          
+          
+        </div>
+
+        <div class="form-group col-md-2">
+          <input 
+          type="text" 
+          class="form-control" 
+          placeholder="Número" 
+          autocomplete="off"
+          formControlName="number" 
+          
+          >
+          <small *ngIf="form.get('number').valid && form.get('number').touched" class="form-text text-success">Ok</small>
+          <small *ngIf="!form.get('number').valid && form.get('number').touched" class="form-text text-danger">Número inválido</small>
+
+                   
+          </div>
+
+          <div class="form-group col-md-4">
+          <input
+          type="text" 
+          class="form-control" 
+          placeholder="Complemento" 
+          autocomplete="off"
+          formControlName="complement" 
+          
+          >
+         </div>
+      </div>
+      <br />
+
+      <h5>Dados de pagamento</h5>
+      <hr />
+
+      <div class="form-row">
+          
+        <div class="form-group col-md-3">
+          <select 
+          class="form-control"
+          formControlName="payment" 
+          
+          >
+            <option value="">Selecione uma opção</option>
+            <option value="dinheiro">Dinheiro</option>
+            <option value="debito">Débito</option>
+          </select> 
+           
+          <small *ngIf="form.get('payment').valid && form.get('payment').touched" class="form-text text-success">Ok</small>
+          <small *ngIf="!form.get('payment').valid && form.get('payment').touched" class="form-text text-danger">Pagamento inválido</small>
+           
+        </div>
+      </div>
+
+      <hr />
+      <button
+       type="submit" 
+       class="btn btn-primary btn-lg" 
+      >Cofirmar compra</button>
+    </form>
+   </div>
+     <div class="purchase-order" *ngIf="purchasedSuccessId !== undefined">
+        <app-purchase-order-success [purchasedSuccessId]= purchasedSuccessId></app-purchase-order-success>
+     </div>
+  </div>
+  
+  

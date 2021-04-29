@@ -1,0 +1,48 @@
+<div class="fixed-top">
+  <nav class="navbar navbar-light bg-faded">
+    <div class="container">
+      <div class="col-md-4">
+        <a routerLink="" class="navbar-brand">
+          <img src="/assets/logo.png" />
+        </a>
+      </div>
+      <div class="col-md-6">
+           <input type="text"
+               class="form-control" 
+               placeholder="Search for Offers..."
+               #searchTerm
+               (keyup)="search(searchTerm.value)"
+               />
+
+               <ul class="list-group" style="position:absolute; z-index: 999;">
+                <li class="list-group-item" *ngFor="let offer of offers | async">
+                  <a [routerLink]="['/offer', offer.id]" (click)="clearSearch()">
+                  {{offer.title | shortDescription:15}}
+                </a>
+                </li>
+               </ul>
+       </div>
+      <div class="col-md-2">
+        <a routerLink="/purchase-order"><img src="/assets/carrinho.png" />
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="menu">
+    <div class="container">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/restaurants']" routerLinkActive="active">Restaurants</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/entertainment']" routerLinkActive="active">Entertainment</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="banner">
+  <img src="/assets/banners/img_1.jpg" />
+</div>
